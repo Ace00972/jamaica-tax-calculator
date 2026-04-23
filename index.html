@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jamaica Salary & Tax Calculator 2026 — NIS, NHT, PAYE, Education Tax</title>
+<meta name="description" content="Free Jamaica salary calculator. Instantly calculate your take-home pay after NIS, NHT, Education Tax and PAYE income tax. Updated for 2025/2026 rates." />
+<meta name="keywords" content="Jamaica tax calculator, PAYE calculator Jamaica, NIS contribution calculator, NHT calculator, Jamaica salary calculator, take home pay Jamaica" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C; --gold-light: #F5E6C8; --gold-dark: #8B6914;
+    --ink: #1A1A1A; --ink-muted: #5A5A5A; --ink-faint: #9A9A9A;
+    --cream: #FDFAF5; --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.09); --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --green: #2E7D32; --red: #C62828;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+
+  header { background: var(--ink); padding: 1.5rem; text-align: center; }
+  .header-inner { max-width: 720px; margin: 0 auto; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 26px; color: white; margin-bottom: 6px; }
+  header p { color: #888; font-size: 14px; }
+
+  .container { max-width: 720px; margin: 2rem auto; padding: 0 1.25rem 4rem; }
+
+  /* Ad slot */
+  .ad-slot {
+    background: white; border: 1px dashed var(--border);
+    border-radius: var(--radius); padding: 1rem; text-align: center;
+    color: var(--ink-faint); font-size: 12px; margin-bottom: 1.5rem;
+    min-height: 90px; display: flex; align-items: center; justify-content: center;
+  }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius);
+    border: 1px solid var(--border); padding: 1.5rem;
+    box-shadow: var(--shadow); margin-bottom: 1.25rem;
+  }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 1.25rem; color: var(--ink); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 12px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  input, select {
+    padding: 10px 14px; border: 1px solid rgba(0,0,0,0.14); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink);
+    background: white; outline: none; width: 100%; transition: border-color 0.2s;
+  }
+  input:focus, select:focus { border-color: var(--gold); }
+  #salary { font-size: 22px; font-weight: 500; }
+
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+  .metric { background: #F7F7F5; border-radius: 10px; padding: 1rem; text-align: center; }
+  .metric-label { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .metric-value { font-size: 20px; font-weight: 600; }
+  .metric-value.green { color: var(--green); }
+  .metric-value.red { color: var(--red); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { padding: 9px 14px; text-align: left; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-muted);
+    background: #F7F7F5; border-bottom: 1px solid var(--border); }
+  th:last-child, td:last-child { text-align: right; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--ink); }
+  tr:last-child td { border-bottom: none; }
+  .td-note { font-size: 11px; color: var(--ink-faint); margin-left: 6px; }
+  .td-amount { color: var(--red); font-weight: 500; }
+  .td-net { color: var(--green); font-weight: 600; }
+  tfoot td { font-weight: 600; background: #F7F7F5; }
+
+  .disclaimer { font-size: 11px; color: var(--ink-faint); line-height: 1.7; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; text-align: left; background: none; border: none;
+    padding: 14px 0; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-weight: 500; color: var(--ink); cursor: pointer; display: flex;
+    justify-content: space-between; align-items: center; gap: 1rem; }
+  .faq-a { font-size: 13.5px; color: var(--ink-muted); line-height: 1.7; padding-bottom: 14px; display: none; }
+  .faq-a.open { display: block; }
+  .faq-arrow { transition: transform 0.2s; font-size: 12px; flex-shrink: 0; }
+  .faq-arrow.open { transform: rotate(180deg); }
+
+  footer { background: var(--ink); color: #666; padding: 2rem 1.25rem; text-align: center; }
+  footer p { font-size: 12px; }
+  footer a { color: #888; text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: var(--gold); }
+
+  @media (max-width: 520px) {
+    .form-row { grid-template-columns: 1fr; }
+    header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>Jamaica Salary & Tax Calculator 2026</h1>
+    <p>NIS · NHT · Education Tax · PAYE — instantly calculate your take-home pay</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Ad slot top (replace with real AdSense code) -->
+  <div class="ad-slot" id="ad-top">
+    <!-- AdSense ad unit goes here -->
+    Advertisement
+  </div>
+
+  <!-- Calculator -->
+  <div class="card">
+    <div class="card-title">Enter your salary</div>
+    <div class="form-row">
+      <div class="field">
+        <label>Employment type</label>
+        <select id="empType" onchange="calc()">
+          <option value="employee">Employee</option>
+          <option value="self">Self-Employed</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Pay period</label>
+        <select id="period" onchange="calc()">
+          <option value="monthly">Monthly</option>
+          <option value="annual">Annual</option>
+          <option value="weekly">Weekly</option>
+          <option value="fortnightly">Fortnightly</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Gross salary (J$)</label>
+      <input type="number" id="salary" placeholder="e.g. 150,000" oninput="calc()" value="150000" />
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div id="results" style="display:none;">
+
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Gross pay</div><div class="metric-value" id="r-gross">—</div></div>
+      <div class="metric"><div class="metric-label">Total deductions</div><div class="metric-value red" id="r-deductions">—</div></div>
+      <div class="metric"><div class="metric-label">Take-home pay</div><div class="metric-value green" id="r-net">—</div></div>
+      <div class="metric"><div class="metric-label">Effective rate</div><div class="metric-value" id="r-rate">—</div></div>
+    </div>
+
+    <!-- Employee deductions -->
+    <div class="card">
+      <div class="card-title">Your deductions</div>
+      <table>
+        <thead><tr><th>Deduction</th><th>Rate</th><th>Amount</th></tr></thead>
+        <tbody id="breakdown-rows"></tbody>
+        <tfoot><tr><td>Net take-home pay</td><td></td><td class="td-net" id="r-net2">—</td></tr></tfoot>
+      </table>
+    </div>
+
+    <!-- Ad slot middle -->
+    <div class="ad-slot">
+      <!-- AdSense ad unit goes here -->
+      Advertisement
+    </div>
+
+    <!-- Employer contributions -->
+    <div class="card" id="employer-section">
+      <div class="card-title">Employer contributions <span style="font-size:12px; font-weight:400; color:var(--ink-faint);">(paid by your employer on top of your salary)</span></div>
+      <table>
+        <thead><tr><th>Contribution</th><th>Rate</th><th>Amount</th></tr></thead>
+        <tbody id="employer-rows"></tbody>
+        <tfoot><tr><td>Total cost to employer</td><td></td><td id="r-employer-total">—</td></tr></tfoot>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      Rates based on Tax Administration Jamaica (TAJ) guidelines effective 2025/2026: PAYE threshold J$1,500,000/yr · 25% on J$1.5M–J$6M · 30% above J$6M · NIS 3% employee / 3% employer (cap J$5M/yr) · NHT 2% employee / 3% employer · Education Tax 2.25% employee / 3.5% employer · HEART/NTA 3% employer only. This calculator is for guidance only. Verify current rates with <a href="https://www.jamaicatax.gov.jm" target="_blank">Tax Administration Jamaica</a> before filing.
+    </div>
+  </div>
+
+  <!-- Ad slot -->
+  <div class="ad-slot">Advertisement</div>
+
+  <!-- FAQ for SEO -->
+  <div class="card">
+    <div class="card-title">Frequently asked questions</div>
+    <div id="faq"></div>
+  </div>
+
+</div>
+
+<footer>
+  <p style="margin-bottom:8px; color:#888;">Jamaica Salary & Tax Calculator 2026 — Free tool for Jamaican employees and self-employed persons</p>
+  <p><a href="mailto:support@yourdomain.com">Contact</a> <a href="#">Privacy Policy</a></p>
+  <p style="margin-top:12px;">© 2026 · Rates sourced from Tax Administration Jamaica. Not financial or legal advice.</p>
+</footer>
+
+<script>
+const fmt = n => 'J$' + Math.round(n).toLocaleString();
+const pct = n => n.toFixed(2) + '%';
+
+function toAnnual(val, p) {
+  return p === 'annual' ? val : p === 'monthly' ? val*12 : p === 'weekly' ? val*52 : val*26;
+}
+function fromAnnual(val, p) {
+  return p === 'annual' ? val : p === 'monthly' ? val/12 : p === 'weekly' ? val/52 : val/26;
+}
+
+function calc() {
+  const raw = parseFloat(document.getElementById('salary').value);
+  const period = document.getElementById('period').value;
+  const empType = document.getElementById('empType').value;
+  if (!raw || raw <= 0) { document.getElementById('results').style.display='none'; return; }
+
+  const gross = toAnnual(raw, period);
+  const P = v => fmt(fromAnnual(v, period));
+
+  const NIS_RATE = empType === 'self' ? 0.06 : 0.03;
+  const NIS_CAP = 5000000;
+  const nis = Math.min(gross, NIS_CAP) * NIS_RATE;
+  const nht = gross * 0.02;
+  const edu = gross * 0.0225;
+
+  const taxable = Math.max(0, gross - nis - 1500000);
+  const band1 = Math.min(taxable, 4500000);
+  const band2 = Math.max(0, taxable - 4500000);
+  const paye = band1 * 0.25 + band2 * 0.30;
+
+  const total = nis + nht + edu + paye;
+  const net = gross - total;
+  const rate = (total / gross) * 100;
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('r-gross').textContent = P(gross);
+  document.getElementById('r-deductions').textContent = P(total);
+  document.getElementById('r-net').textContent = P(net);
+  document.getElementById('r-net2').textContent = P(net);
+  document.getElementById('r-rate').textContent = pct(rate);
+
+  document.getElementById('breakdown-rows').innerHTML = [
+    { n:'NIS', note: empType==='self'?'6% self-employed':'3% employee', r: NIS_RATE*100, a: nis, cap: gross>NIS_CAP },
+    { n:'NHT', note:'2%', r:2, a:nht },
+    { n:'Education Tax', note:'2.25%', r:2.25, a:edu },
+    { n:'PAYE income tax', note: taxable<=0?'Below threshold — no tax due':'25% / 30% on taxable income', r:null, a:paye },
+  ].map(r => `<tr>
+    <td>${r.n}<span class="td-note">${r.note}${r.cap?' · capped at J$5M':''}</span></td>
+    <td>${r.r!==null?pct(r.r):'—'}</td>
+    <td class="td-amount">${P(r.a)}</td>
+  </tr>`).join('');
+
+  if (empType === 'employee') {
+    document.getElementById('employer-section').style.display = 'block';
+    const eNIS = Math.min(gross, NIS_CAP) * 0.03;
+    const eNHT = gross * 0.03;
+    const eEdu = gross * 0.035;
+    const eHEART = gross * 0.03;
+    document.getElementById('employer-rows').innerHTML = [
+      { n:'Employer NIS', note:'3%', a:eNIS },
+      { n:'Employer NHT', note:'3%', a:eNHT },
+      { n:'Employer Education Tax', note:'3.5%', a:eEdu },
+      { n:'HEART/NTA levy', note:'3%', a:eHEART },
+    ].map(r => `<tr>
+      <td>${r.n}<span class="td-note">${r.note}</span></td><td></td>
+      <td class="td-amount">${P(r.a)}</td>
+    </tr>`).join('');
+    document.getElementById('r-employer-total').textContent = P(gross + eNIS + eNHT + eEdu + eHEART);
+  } else {
+    document.getElementById('employer-section').style.display = 'none';
+  }
+}
+
+const faqs = [
+  { q:'What is the income tax threshold in Jamaica for 2026?', a:'The PAYE income tax threshold is J$1,500,000 per year (approximately J$125,000 per month). If your annual income is below this amount, you pay no income tax.' },
+  { q:'What is the NIS contribution rate in Jamaica?', a:'Employees pay 3% NIS on earnings up to J$5,000,000 per year. Employers also pay 3%. Self-employed persons pay 6% themselves. NIS contributions are tax-deductible for PAYE purposes.' },
+  { q:'What is NHT and how much do I pay?', a:'NHT (National Housing Trust) contributions fund housing development and provide mortgage assistance. Employees contribute 2% of gross earnings with no ceiling. Employers pay 3%.' },
+  { q:'What is Education Tax in Jamaica?', a:'Education Tax is earmarked for Jamaica\'s education system. Employees pay 2.25% of gross earnings. Employers pay 3.5%. There is no ceiling on Education Tax contributions.' },
+  { q:'How is PAYE income tax calculated in Jamaica?', a:'PAYE is calculated on your gross income minus your NIS contribution minus the J$1.5M personal allowance. The rate is 25% on taxable income up to J$6M and 30% on any amount above J$6M.' },
+  { q:'Do self-employed people pay the same rates?', a:'Self-employed persons pay NIS at 6% (combined employee and employer share), NHT at 2%, Education Tax at 2.25%, and income tax at the same PAYE rates. They must file and pay quarterly.' },
+];
+
+document.getElementById('faq').innerHTML = faqs.map((f,i) => `
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(${i})">
+      <span>${f.q}</span><span class="faq-arrow" id="arr-${i}">▼</span>
+    </button>
+    <div class="faq-a" id="faq-${i}">${f.a}</div>
+  </div>`).join('');
+
+function toggleFaq(i) {
+  const a = document.getElementById('faq-'+i);
+  const arr = document.getElementById('arr-'+i);
+  const open = a.classList.toggle('open');
+  arr.classList.toggle('open', open);
+}
+
+calc();
+</script>
+</body>
+</html>
